@@ -18,6 +18,6 @@ app.initializers.add('ryanvade-flarum-login-redirect', function() {
 
   extend(SessionDropdown.prototype, 'items', function(items){
     items.remove('logOut');
-    items.add('LogOut', <a href="http://localhost:8888/auth/logout" className="Button Button--link">Log Out</a>)
+    items.add('LogOut', <a href="http://localhost:8888/auth/logout" className="icon fa fa-fw fa-sign-out Button-icon">Log Out</a>)
   });
 });
