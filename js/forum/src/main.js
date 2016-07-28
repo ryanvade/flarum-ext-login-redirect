@@ -5,6 +5,7 @@ import SessionDropdown from 'flarum/components/SessionDropdown';
 import LogInModal from 'flarum/components/LogInModal';
 
 app.initializers.add('ryanvade-flarum-login-redirect', function() {
+  console.log("Hello");
   extend(HeaderSecondary.prototype, 'items', function(items) {
     items.remove('logIn');
     items.remove('signUp');
