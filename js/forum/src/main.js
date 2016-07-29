@@ -3,6 +3,7 @@ import SignUpModal from 'flarum/components/SignUpModal';
 import HeaderSecondary from 'flarum/components/HeaderSecondary';
 import SessionDropdown from 'flarum/components/SessionDropdown';
 import LogInModal from 'flarum/components/LogInModal';
+import LogInButtons from 'flarum/components/LoginButtons';
 
 app.initializers.add('ryanvade-flarum-login-redirect', function() {
   console.log("Hello");
@@ -25,15 +26,21 @@ app.initializers.add('ryanvade-flarum-login-redirect', function() {
     items.add('LogOut', <a href="http://localhost/auth/logout" className="icon fa fa-fw fa-sign-out Button-icon">Log Out</a>)
   });
 
-  LogInModal.content = function() {
-    console.log("Hello");
+  LogInModal.prototype.content = function () {
     return [
       <div className="Modal-body">
-      <span>Hello</span>
-      </div>,
+        <div className="Form Form--centered">
+          <a className="btn btn-primary" href="http://localhost/auth/login">Login with Cosmoquest</a>
+        </div>
+       </div>,
       <div className="Modal-footer">
-        <span>Hello</span>
+        <p className="LogInModal-forgotPassword">
+        <a className="btn" href="http://localhost/password/reset">Forgot Password?</a>
+        </p>
+        <p className="LogInModal-signUp">
+          <a className="btn" href="http://localhost/auth/register">Register with Cosmoquest</a>
+        </p>
       </div>
     ];
-  };
+  }
 });
