@@ -1,5 +1,5 @@
 {
-    "name": "ryanvade/flarum-login-redirect",
+    "name": "ryanvade/flarum-ext-login-redirect",
     "description": "Redirect Login, logout, and Register pages. ",
     "type": "flarum-extension",
     "keywords": ["links"],
