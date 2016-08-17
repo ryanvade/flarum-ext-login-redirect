@@ -2,6 +2,7 @@ import { extend } from 'flarum/extend';
 import SignUpModal from 'flarum/components/SignUpModal';
 import HeaderSecondary from 'flarum/components/HeaderSecondary';
 import SessionDropdown from 'flarum/components/SessionDropdown';
+import ChangePasswordModal from 'flarum/components/ChangePasswordModal'
 import LogInModal from 'flarum/components/LogInModal';
 import LogInButtons from 'flarum/components/LoginButtons';
 
@@ -42,5 +43,18 @@ app.initializers.add('ryanvade-flarum-login-redirect', function() {
         </p>
       </div>
     ];
+  }
+
+  ChangePasswordModal.prototype.content = function() {
+    return (
+      <div className="Modal-body">
+        <div className="Form Form--centered">
+          <p className="helpText">Change your passsword.</p>
+          <div className="Form-group">
+            <a href="/password/reset" class='Button Button--primary Button--block'>Click here to change your password.</a>
+          </div>
+        </div>
+      </div>
+    );
   }
 });
