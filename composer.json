@@ -17,6 +17,6 @@
         "flarum-extension": {
             "title": "Login Redirect"
         }
-    }
+    },
     "minimum-stability": "dev"
 }
