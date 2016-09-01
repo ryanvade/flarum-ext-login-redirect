@@ -18,5 +18,5 @@
             "title": "Login Redirect"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "beta"
 }
