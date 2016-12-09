@@ -7,16 +7,7 @@ import LogInModal from 'flarum/components/LogInModal';
 import LogInButtons from 'flarum/components/LoginButtons';
 
 app.initializers.add('ryanvade-flarum-login-redirect', function() {
-  extend(HeaderSecondary.prototype, 'items', function(items) {
-    items.remove('logIn');
-    items.remove('signUp');
-    if(!items.has('session'))
-    {
-      console.log('Does not have session');
-      items.add('SignUp', <a href="https://cosmoquest.org/auth/register" className="Button Button--link">Sign Up</a>);
-      items.add('LogIn', <a href="https://cosmoquest.org/auth/login" className="Button Button--link">Log In</a>);
-    }
-  });
+  // Global login/signup buttons are removed via flarum-ext-cosmoquest-nav
 
   extend(SessionDropdown.prototype, 'items', function(items){
     items.remove('logOut');
