@@ -15,7 +15,13 @@
     },
     "extra": {
         "flarum-extension": {
-            "title": "Login Redirect"
+            "title": "Login Redirect",
+            "icon": {
+              "image": "redirect.svg",
+              "backgroundColor": "#00247d",
+              "backgroundSize": "cover",
+              "backgroundPosition": "center"
+            }
         }
     },
     "minimum-stability": "beta"
