@@ -11,22 +11,22 @@ app.initializers.add('ryanvade-flarum-login-redirect', function() {
 
   extend(SessionDropdown.prototype, 'items', function(items){
     items.remove('logOut');
-    items.add('LogOut', <a href="https://cosmoquest.org/auth/logout" className="icon fa fa-fw fa-sign-out Button-icon">Log Out</a>)
+    items.add('LogOut', <a href="/auth/logout" className="icon fa fa-fw fa-sign-out Button-icon">Log Out</a>)
   });
 
   LogInModal.prototype.content = function () {
     return [
       <div className="Modal-body">
         <div className="Form Form--centered">
-          <a className="btn btn-primary" href="https://cosmoquest.org/auth/login">Login with Cosmoquest</a>
+          <a className="btn btn-primary" href="/auth/login">Login with Cosmoquest</a>
         </div>
        </div>,
       <div className="Modal-footer">
         <p className="LogInModal-forgotPassword">
-        <a className="btn" href="https://cosmoquest.org/password/reset">Forgot Password?</a>
+        <a className="btn" href="/password/reset">Forgot Password?</a>
         </p>
         <p className="LogInModal-signUp">
-          <a className="btn" href="https://cosmoquest.org/auth/register">Register with Cosmoquest</a>
+          <a className="btn" href="/auth/register">Register with Cosmoquest</a>
         </p>
       </div>
     ];
