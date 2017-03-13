@@ -1,7 +1,7 @@
-System.register('ryanvade/flarum-login-redirect/main', ['flarum/extend', 'flarum/components/SignUpModal', 'flarum/components/HeaderSecondary', 'flarum/components/SessionDropdown', 'flarum/components/ChangePasswordModal', 'flarum/components/LogInModal', 'flarum/components/LoginButtons'], function (_export) {
+System.register('ryanvade/flarum-login-redirect/main', ['flarum/extend', 'flarum/components/SignUpModal', 'flarum/components/HeaderSecondary', 'flarum/components/SessionDropdown', 'flarum/components/SettingsPage', 'flarum/components/LogInModal', 'flarum/components/LoginButtons', 'flarum/components/LinkButton', 'flarum/components/FieldSet', 'flarum/utils/ItemList', 'flarum/components/Button'], function (_export) {
   'use strict';
 
-  var extend, SignUpModal, HeaderSecondary, SessionDropdown, ChangePasswordModal, LogInModal, LogInButtons;
+  var extend, SignUpModal, HeaderSecondary, SessionDropdown, SettingsPage, LogInModal, LogInButtons, LinkButton, FieldSet, ItemList, Button;
   return {
     setters: [function (_flarumExtend) {
       extend = _flarumExtend.extend;
@@ -11,12 +11,20 @@ System.register('ryanvade/flarum-login-redirect/main', ['flarum/extend', 'flarum
       HeaderSecondary = _flarumComponentsHeaderSecondary['default'];
     }, function (_flarumComponentsSessionDropdown) {
       SessionDropdown = _flarumComponentsSessionDropdown['default'];
-    }, function (_flarumComponentsChangePasswordModal) {
-      ChangePasswordModal = _flarumComponentsChangePasswordModal['default'];
+    }, function (_flarumComponentsSettingsPage) {
+      SettingsPage = _flarumComponentsSettingsPage['default'];
     }, function (_flarumComponentsLogInModal) {
       LogInModal = _flarumComponentsLogInModal['default'];
     }, function (_flarumComponentsLoginButtons) {
       LogInButtons = _flarumComponentsLoginButtons['default'];
+    }, function (_flarumComponentsLinkButton) {
+      LinkButton = _flarumComponentsLinkButton['default'];
+    }, function (_flarumComponentsFieldSet) {
+      FieldSet = _flarumComponentsFieldSet['default'];
+    }, function (_flarumUtilsItemList) {
+      ItemList = _flarumUtilsItemList['default'];
+    }, function (_flarumComponentsButton) {
+      Button = _flarumComponentsButton['default'];
     }],
     execute: function () {
 
@@ -27,7 +35,7 @@ System.register('ryanvade/flarum-login-redirect/main', ['flarum/extend', 'flarum
           items.remove('logOut');
           items.add('LogOut', m(
             'a',
-            { href: 'https://cosmoquest.org/auth/logout', className: 'icon fa fa-fw fa-sign-out Button-icon' },
+            { href: '/auth/logout', className: 'icon fa fa-fw fa-sign-out Button-icon' },
             'Log Out'
           ));
         });
@@ -41,7 +49,7 @@ System.register('ryanvade/flarum-login-redirect/main', ['flarum/extend', 'flarum
               { className: 'Form Form--centered' },
               m(
                 'a',
-                { className: 'btn btn-primary', href: 'https://cosmoquest.org/auth/login' },
+                { className: 'btn btn-primary', href: '/auth/login' },
                 'Login with Cosmoquest'
               )
             )
@@ -53,7 +61,7 @@ System.register('ryanvade/flarum-login-redirect/main', ['flarum/extend', 'flarum
               { className: 'LogInModal-forgotPassword' },
               m(
                 'a',
-                { className: 'btn', href: 'https://cosmoquest.org/password/reset' },
+                { className: 'btn', href: '/password/reset' },
                 'Forgot Password?'
               )
             ),
@@ -62,37 +70,34 @@ System.register('ryanvade/flarum-login-redirect/main', ['flarum/extend', 'flarum
               { className: 'LogInModal-signUp' },
               m(
                 'a',
-                { className: 'btn', href: 'https://cosmoquest.org/auth/register' },
+                { className: 'btn', href: '/auth/register' },
                 'Register with Cosmoquest'
               )
             )
           )];
         };
 
-        ChangePasswordModal.prototype.content = function () {
-          return m(
-            'div',
-            { className: 'Modal-body' },
-            m(
-              'div',
-              { className: 'Form Form--centered' },
-              m(
-                'p',
-                { className: 'helpText' },
-                'Change your passsword.'
-              ),
-              m(
-                'div',
-                { className: 'Form-group' },
-                m(
-                  'a',
-                  { href: 'https://cosmoquest.org/password/reset', 'class': 'Button Button--primary Button--block' },
-                  'Click here to change your password.'
-                )
-              )
-            )
-          );
-        };
+        extend(SettingsPage.prototype, 'settingsItems', function (settingsItems) {
+          var user = app.session.user;
+          var items = new ItemList();
+          items.add('changePassword', m(
+            'a',
+            { className: 'Button', href: '/user/settings' },
+            'Change Password'
+          ));
+
+          items.add('changeEmail', m(
+            'a',
+            { className: 'Button', href: '/user/settings' },
+            'Change Email'
+          ));
+
+          settingsItems.replace('account', FieldSet.component({
+            label: app.translator.trans('core.forum.settings.account_heading'),
+            className: 'Settings-account',
+            children: items.toArray()
+          }));
+        });
       });
     }
   };

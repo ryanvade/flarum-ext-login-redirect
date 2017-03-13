@@ -2,9 +2,14 @@ import { extend } from 'flarum/extend';
 import SignUpModal from 'flarum/components/SignUpModal';
 import HeaderSecondary from 'flarum/components/HeaderSecondary';
 import SessionDropdown from 'flarum/components/SessionDropdown';
-import ChangePasswordModal from 'flarum/components/ChangePasswordModal'
+import SettingsPage from 'flarum/components/SettingsPage';
 import LogInModal from 'flarum/components/LogInModal';
 import LogInButtons from 'flarum/components/LoginButtons';
+import LinkButton from 'flarum/components/LinkButton';
+import FieldSet from 'flarum/components/FieldSet';
+import ItemList from 'flarum/utils/ItemList';
+import Button from 'flarum/components/Button';
+
 
 app.initializers.add('ryanvade-flarum-login-redirect', function() {
   // Global login/signup buttons are removed via flarum-ext-cosmoquest-nav
@@ -32,16 +37,17 @@ app.initializers.add('ryanvade-flarum-login-redirect', function() {
     ];
   }
 
-  ChangePasswordModal.prototype.content = function() {
-    return (
-      <div className="Modal-body">
-        <div className="Form Form--centered">
-          <p className="helpText">Change your passsword.</p>
-          <div className="Form-group">
-            <a href="https://cosmoquest.org/password/reset" class='Button Button--primary Button--block'>Click here to change your password.</a>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  extend(SettingsPage.prototype, 'settingsItems', function(settingsItems) {
+    const user = app.session.user;
+    const items = new ItemList();
+    items.add('changePassword', <a className="Button" href="/user/settings">Change Password</a>);
+
+    items.add('changeEmail',<a className="Button" href="/user/settings">Change Email</a>);
+
+    settingsItems.replace('account', FieldSet.component({
+      label: app.translator.trans('core.forum.settings.account_heading'),
+      className: 'Settings-account',
+      children: items.toArray()
+    }));
+  });
 });
